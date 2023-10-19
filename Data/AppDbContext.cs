@@ -15,25 +15,22 @@ namespace eBlog.Data
         {
 
         }
+        // Specifying the cascade behavior by using the Fluent API
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {   
 
-        //protected override void onmodelcreating(modelbuilder modelbuilder)
-        //{
-        //    modelbuilder.entity<post>()
-        //        .hasone(p => p.user)
-        //        .withmany(u => u.posts)
-        //        .hasforeignkey(p => p.userid);
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Comments)
+                .OnDelete(DeleteBehavior.Restrict); // or DeleteBehavior.NoAction
 
-        //    modelbuilder.entity<comment>()
-        //        .hasone(c => c.user)
-        //        .withmany(u => u.comments)
-        //        .hasforeignkey(c => c.userid);
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Post)
+                .WithMany(p => p.Comments)
+                .OnDelete(DeleteBehavior.Restrict); // or DeleteBehavior.NoAction
 
-        //    modelbuilder.entity<comment>()
-        //        .hasone(c => c.post)
-        //        .withmany(p => p.comments)
-        //        .hasforeignkey(c => c.postid);
-        //    base.onmodelcreating(modelbuilder);
-        //}
+            base.OnModelCreating(modelBuilder);
+        }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
