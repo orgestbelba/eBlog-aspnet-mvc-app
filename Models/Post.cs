@@ -12,10 +12,20 @@ namespace eBlog.Models
     {
         [Key]
         public int PostID { get; set; }
+
+        [Display(Name = "Category")]
         public PostCategory Category { get; set; }
+
+        [Display(Name = "Title")]
         public string Title { get; set; }
+
+        [Display(Name = "Text")]
         public string Text { get; set; }
+
+        [Display(Name = "Image")]
         public string ImagePath { get; set; }
+
+        [Display(Name = "Post Time")]
         public DateTime PostTime { get; set; }
 
         //Navigation Properties
