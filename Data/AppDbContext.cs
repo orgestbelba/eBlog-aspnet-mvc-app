@@ -15,6 +15,7 @@ namespace eBlog.Data
         {
 
         }
+
         // Specifying the cascade behavior by using the Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {   

@@ -12,6 +12,7 @@ namespace eBlog.Models
         [Key]
         public int CommentID { get; set; }
         public string TheComment { get; set; }
+        public DateTime CommentTime { get; set; }
 
         //Relationships
 

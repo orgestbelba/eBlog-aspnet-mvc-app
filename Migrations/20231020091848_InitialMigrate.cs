@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+using System;
+
+
 namespace eBlog.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +35,7 @@ namespace eBlog.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -52,6 +56,7 @@ namespace eBlog.Migrations
                     CommentID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TheComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CommentTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     PostID = table.Column<int>(type: "int", nullable: false)
                 },
