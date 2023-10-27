@@ -1,4 +1,5 @@
 using eBlog.Data;
+using eBlog.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +29,11 @@ namespace eBlog
             //DbContext configuration
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
+            //ServicesConfiguration
             services.AddControllersWithViews();
+
+            services.AddScoped<IPostService, PostService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +50,7 @@ namespace eBlog
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();

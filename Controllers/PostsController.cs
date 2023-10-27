@@ -1,4 +1,5 @@
 ﻿using eBlog.Data;
+using eBlog.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,20 +11,27 @@ namespace eBlog.Controllers
 {
     public class PostsController : Controller
     {
-        // injecting the AppDbContext to the controller
 
-        private readonly AppDbContext _context;
+        private readonly IPostService _service;         // injecting the Post Service to the controller
 
-        public PostsController(AppDbContext context)
+        public PostsController(IPostService service)
         {
-            _context = context;
+            _service = service;
         }
-        
+
         public async Task<IActionResult> Index()
         {
-            var data = await _context.Posts.ToListAsync();
+            var data = await _service.GetAll();
             return View(data);
         }
 
+        public async Task<IActionResult> SinglePost(int id)
+        {
+            var data = await _service.GetByID(id);
+
+            if (data == null) return View("Empty");
+
+            return View(data);
+        }
     }
 }
