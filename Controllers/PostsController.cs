@@ -22,6 +22,7 @@ namespace eBlog.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAll();
+
             return View(data);
         }
 

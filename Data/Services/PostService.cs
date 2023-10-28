@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eBlog.ViewModels;
 
 namespace eBlog.Data.Services
 {
@@ -37,15 +38,23 @@ namespace eBlog.Data.Services
             return data;
         }
 
-        public async Task<Post> GetByID(int id)
+        public async Task<SinglePostViewModel> GetByID(int id)
         {
-            var data = await _context.Posts
+            var currentPost = await _context.Posts
                 .Include(p => p.User)
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.User) //Including the User navigation property for the Comments
                 .FirstOrDefaultAsync(p => p.PostID == id);
 
-            return data;
+            var relatedPosts = _context.Posts.Where(p => p.Category == currentPost.Category && p.PostID != id).ToList();
+
+            var viewModel = new SinglePostViewModel //Using the ViewModel to get posts with the same category alongside with the data if the current post.
+            {
+                CurrentPost = currentPost,
+                RelatedPosts = relatedPosts
+            };
+
+            return viewModel;
         }
 
         Task<Post> IPostService.Update(int id, Post newPost)

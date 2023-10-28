@@ -1,4 +1,8 @@
-﻿@model Post
+﻿@using eBlog.Data
+
+@using eBlog.ViewModels
+
+@model SinglePostViewModel
 
 @{
     ViewData["Title"] = "Single Post";
@@ -7,26 +11,26 @@
 <div class="row tm-row">
     <div class="col-12">
         <hr class="tm-hr-primary tm-mb-55">
-        <img src="@Model.ImagePath" width="954" height="535" class="tm-mb-40">
+        <img src="@Model.CurrentPost.ImagePath" width="954" height="535" class="tm-mb-40">
     </div>
 </div>
 <div class="row tm-row">
     <div class="col-lg-8 tm-post-col">
         <div class="tm-post-full">
             <div class="mb-4">
-                <h2 class="pt-2 tm-color-primary tm-post-title">@Model.Title</h2>
-                <p class="tm-mb-40">@Model.PostTime.ToString("dd MMMM, yyyy") posted by @Model.User.Username</p>
+                <h2 class="pt-2 tm-color-primary tm-post-title">@Model.CurrentPost.Title</h2>
+                <p class="tm-mb-40">@Model.CurrentPost.PostTime.ToString("dd MMMM, yyyy") posted by @Model.CurrentPost.User.Username</p>
                 <p>
-                    @Model.Text
+                    @Model.CurrentPost.Text
                 </p>
-                <span class="d-block text-right tm-color-primary">Category : @Model.Category</span>
+                <span class="d-block text-right tm-color-primary">Category : @Model.CurrentPost.Category</span>
             </div>
 
             <!-- Comments -->
             <div>
                 <h2 class="tm-color-primary tm-post-title">Comments</h2>
                 <hr class="tm-hr-primary tm-mb-45">
-                @foreach (var item in Model.Comments)
+                @foreach (var item in Model.CurrentPost.Comments)
                 {
                     <div class="tm-comment tm-mb-45">
                         <figure class="tm-comment-figure">
@@ -63,36 +67,27 @@
     </div>
     <aside class="col-lg-4 tm-aside-col">
         <div class="tm-post-sidebar">
+            <!-- Categories -->
             <hr class="mb-3 tm-hr-primary">
             <h2 class="mb-4 tm-post-title tm-color-primary">Categories</h2>
             <ul class="tm-mb-75 pl-5 tm-category-list">
-                <li><a href="#" class="tm-color-primary">Visual Designs</a></li>
-                <li><a href="#" class="tm-color-primary">Travel Events</a></li>
-                <li><a href="#" class="tm-color-primary">Web Development</a></li>
-                <li><a href="#" class="tm-color-primary">Video and Audio</a></li>
-                <li><a href="#" class="tm-color-primary">Etiam auctor ac arcu</a></li>
-                <li><a href="#" class="tm-color-primary">Sed im justo diam</a></li>
+                @foreach (var category in Enum.GetValues(typeof(PostCategory)))
+                {
+                    <li><a href="#" class="tm-color-primary">@category</a></li>
+                }
             </ul>
+            <!-- Related Posts(Same Category)-->
             <hr class="mb-3 tm-hr-primary">
             <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
-            <a href="#" class="d-block tm-mb-40">
-                <figure>
-                    <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
-                    <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
-                </figure>
-            </a>
-            <a href="#" class="d-block tm-mb-40">
-                <figure>
-                    <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid">
-                    <figcaption class="tm-color-primary">Integer quis lectus eget justo ullamcorper ullamcorper</figcaption>
-                </figure>
-            </a>
-            <a href="#" class="d-block tm-mb-40">
-                <figure>
-                    <img src="img/img-06.jpg" alt="Image" class="mb-3 img-fluid">
-                    <figcaption class="tm-color-primary">Nam lobortis nunc sed faucibus commodo</figcaption>
-                </figure>
-            </a>
+            @foreach (var post in Model.RelatedPosts)
+            {
+                <a href="#" class="d-block tm-mb-40">
+                    <figure>
+                        <img src="@post.ImagePath" alt="Image" class="mb-3 img-fluid">
+                        <figcaption class="tm-color-primary">@post.Title</figcaption>
+                    </figure>
+                </a>
+            }
         </div>
     </aside>
 </div>
