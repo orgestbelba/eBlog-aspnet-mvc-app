@@ -12,7 +12,7 @@ namespace eBlog.Controllers
     public class PostsController : Controller
     {
 
-        private readonly IPostService _service;         // injecting the Post Service to the controller
+        private readonly IPostService _service;  // injecting the Post Service to the controller
 
         public PostsController(IPostService service)
         {
@@ -33,6 +33,20 @@ namespace eBlog.Controllers
             if (data == null) return View("Empty");
 
             return View(data);
+        }
+
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var data = await _service.GetAll();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                string filter = searchString.ToLower(); //Making the search not Case Sensitive
+                var matches = data.Where(p => p.Title.ToLower().Contains(filter) || p.Text.ToLower().Contains(filter));
+                return View("Index", matches);
+            }
+
+            return View("Index", data);
         }
     }
 }

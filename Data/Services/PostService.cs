@@ -46,9 +46,11 @@ namespace eBlog.Data.Services
                 .ThenInclude(c => c.User) //Including the User navigation property for the Comments
                 .FirstOrDefaultAsync(p => p.PostID == id);
 
-            var relatedPosts = _context.Posts.Where(p => p.Category == currentPost.Category && p.PostID != id).ToList();
+            var relatedPosts = await _context.Posts
+                .Where(p => p.Category == currentPost.Category && p.PostID != id)
+                .ToListAsync();
 
-            var viewModel = new SinglePostViewModel //Using the ViewModel to get posts with the same category alongside with the data if the current post.
+            var viewModel = new SinglePostViewModel //Using the ViewModel to get posts with the same category alongside with the the current post.
             {
                 CurrentPost = currentPost,
                 RelatedPosts = relatedPosts
@@ -61,5 +63,6 @@ namespace eBlog.Data.Services
         {
             throw new NotImplementedException();
         }
+
     }
 }
