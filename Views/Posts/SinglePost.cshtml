@@ -73,7 +73,7 @@
             <ul class="tm-mb-75 pl-5 tm-category-list">
                 @foreach (var category in Enum.GetValues(typeof(PostCategory)))
                 {
-                    <li><a href="#" class="tm-color-primary">@category</a></li>
+                    <li><a asp-action="GetByCategory" asp-route-category="@category" class="tm-color-primary">@category</a></li>
                 }
             </ul>
             <!-- Related Posts(Same Category)-->

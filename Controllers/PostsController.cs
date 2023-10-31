@@ -26,6 +26,7 @@ namespace eBlog.Controllers
             return View(data);
         }
 
+        //GET: SinglePost/id
         public async Task<IActionResult> SinglePost(int id)
         {
             var data = await _service.GetByID(id);
@@ -35,6 +36,7 @@ namespace eBlog.Controllers
             return View(data);
         }
 
+        //GET: Search/searchString 
         public async Task<IActionResult> Search(string searchString)
         {
             var data = await _service.GetAll();
@@ -47,6 +49,17 @@ namespace eBlog.Controllers
             }
 
             return View("Index", data);
+        }
+
+        //GET: GetByCategory/category
+        public async Task<IActionResult> GetByCategory(string category)
+        {
+            var data = await _service.GetAll();
+
+            var matches = data.Where(p => p.Category.ToString() == category);
+
+            return View("Index", matches);
+
         }
     }
 }
