@@ -17,8 +17,8 @@ namespace eBlog.Models
         //Relationships
 
         //User
-        [ForeignKey("UserID")]
-        public int UserID { get; set; }
+        [ForeignKey("UserId")]
+        public string UserId { get; set; }
         public virtual User User { get; set; }
 
         //Post

@@ -1,8 +1,11 @@
 using eBlog.Data;
 using eBlog.Data.Services;
+using eBlog.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,8 +34,16 @@ namespace eBlog
 
             //ServicesConfiguration
             services.AddControllersWithViews();
-
             services.AddScoped<IPostService, PostService>();
+
+            //Authentication and authorization
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
 
         }
 
@@ -55,6 +66,10 @@ namespace eBlog
 
             app.UseRouting();
 
+            app.UseSession();
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -65,7 +80,8 @@ namespace eBlog
             });
 
             //Seed database
-            AppDbInitializer.Seed(app);
+            AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
+            AppDbInitializer.SeedPostsAndComments(app);
         }
     }
 }
