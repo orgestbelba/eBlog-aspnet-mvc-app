@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+@inject UserManager<User> UserManager;
+
+@if (User.Identity.IsAuthenticated)
+{
+    <li class="tm-nav-item">
+        <a class="tm-nav-link" asp-controller="Users" asp-action="LogOut">
+            <i class="fas fa-sign-out-alt"></i>
+            Log Out
+        </a>
+    </li>
+}
+else
+{
+    <li class="tm-nav-item">
+        <a class="tm-nav-link" asp-controller="Users" asp-action="LogIn">
+            <i class="fas fa-sign-in-alt"></i>
+            SignIn/SignUp
+        </a>
+    </li>
+}
