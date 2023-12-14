@@ -10,5 +10,6 @@ namespace eBlog.ViewModels
     {
         public Post CurrentPost { get; set; }
         public List<Post> RelatedPosts { get; set; }
+        public Comment Comment { get; set; }
     }
 }

@@ -18,9 +18,17 @@ namespace eBlog.Data.Services
             _context = context;
         }
 
+        public async Task AddComment(Comment comment)
+        {
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task AddPost(Post post)
         {
-            throw new NotImplementedException();
+            post.PostTime = DateTime.Now;
+            await _context.Posts.AddAsync(post);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(int id)

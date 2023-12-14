@@ -1,0 +1,93 @@
+﻿@model Post
+
+@{
+    ViewData["Title"] = "CreatePost";
+}
+
+
+<div class="row tm-row tm-mb-120">
+    <div class="col-12">
+        <h2 class="tm-color-primary tm-post-title tm-mb-60">Create a new Post</h2>
+    </div>
+    <div class="col-lg-7 tm-contact-left">
+        <form method="post" asp-action="CreatePost" class="mb-5 ml-auto mr-0 tm-contact-form" enctype="multipart/form-data">
+            <div class="form-group row mb-4">
+                <label asp-for="Title" class="col-sm-3 col-form-label text-right tm-color-primary">Title</label>
+                <div class="col-sm-9">
+                    <input asp-for="Title" class="form-control mr-0 ml-auto" type="text" required>
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label asp-for="Category" class="col-sm-3 col-form-label text-right tm-color-primary">Category</label>
+                <div class="col-sm-9">
+                    <select asp-for="Category" class="form-control mr-0 ml-auto" required>
+                        <option value="">Select a category</option>
+                        @foreach (var category in Enum.GetValues(typeof(eBlog.Data.PostCategory)))
+                         {
+                            <option value="@category">@category</option>
+                         }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row mb-5">
+                <label asp-for="Text" class="col-sm-3 col-form-label text-right tm-color-primary">Post Description</label>
+                <div class="col-sm-9">
+                    <textarea asp-for="Text" class="form-control mr-0 ml-auto" rows="8" required></textarea>
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label class="col-sm-3 col-form-label text-right tm-color-primary">Select an image</label>
+                <div class="col-sm-9">
+                    <input class="form-control mr-0 ml-auto" type="file" name="postedFiles" multiple required>
+                </div>
+            </div>
+            <div class="form-group row text-right">
+                <div class="col-12">
+                    <button class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-5 tm-contact-right">
+        <address class="mb-4 tm-color-gray">
+            120 Lorem ipsum dolor sit amet,
+            consectetur adipiscing 10550
+        </address>
+        <span class="d-block">
+            Tel:
+            <a href="tel:+355688182655" class="tm-color-gray">+355 68 81 82 655</a>
+        </span>
+        <span class="mb-4 d-block">
+            Email:
+            <a href="mailto:orgestbelba@gmail.com" class="tm-color-gray">orgestbelba@gmail.com</a>
+        </span>
+        <p class="mb-5 tm-line-height-short">
+            Maecenas eu mi eu dui cursus
+            consequat non eu metus. Morbi ac
+            turpis eleifend, commodo purus
+            eget, commodo mauris.
+        </p>
+        <ul class="tm-social-links">
+            <li class="mb-2">
+                <a href="https://facebook.com" class="d-flex align-items-center justify-content-center">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="https://twitter.com" class="d-flex align-items-center justify-content-center">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="https://youtube.com" class="d-flex align-items-center justify-content-center">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="https://instagram.com" class="d-flex align-items-center justify-content-center mr-0">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>   

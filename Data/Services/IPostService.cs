@@ -12,6 +12,7 @@ namespace eBlog.Data.Services
         Task<IEnumerable<Post>> GetAll();
         Task<SinglePostViewModel> GetByID(int id);
         Task AddPost(Post post);
+        Task AddComment(Comment comment);
         Task<Post> Update(int id, Post newPost);
         Task Delete(int id);
     }

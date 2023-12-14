@@ -11,7 +11,7 @@
 <div class="row tm-row">
     <div class="col-12">
         <hr class="tm-hr-primary tm-mb-55">
-        <img src="@Model.CurrentPost.ImagePath" width="954" height="535" class="tm-mb-40">
+        <img src="@Url.Content(Model.CurrentPost.ImagePath)" width="954" height="535" class="tm-mb-40">
     </div>
 </div>
 <div class="row tm-row">
@@ -47,16 +47,11 @@
                         </div>
                     </div>
                 }
-                <form action="" class="mb-5 tm-comment-form">
+                <form method="post" asp-action="SinglePost" class="mb-5 tm-comment-form">
+                    <input type="hidden" asp-for="CurrentPost.PostID" />
                     <h2 class="tm-color-primary tm-post-title mb-4">Your comment</h2>
                     <div class="mb-4">
-                        <input class="form-control" name="name" type="text">
-                    </div>
-                    <div class="mb-4">
-                        <input class="form-control" name="email" type="text">
-                    </div>
-                    <div class="mb-4">
-                        <textarea class="form-control" name="message" rows="6"></textarea>
+                        <input asp-for="Comment.TheComment" class="form-control" rows="6" placeholder="Write a comment..."></input>
                     </div>
                     <div class="text-right">
                         <button class="tm-btn tm-btn-primary tm-btn-small">Submit</button>
@@ -81,9 +76,9 @@
             <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
             @foreach (var post in Model.RelatedPosts)
             {
-                <a href="#" class="d-block tm-mb-40">
+                <a asp-action="SinglePost" asp-route-id="@post.PostID" class="d-block tm-mb-40">
                     <figure>
-                        <img src="@post.ImagePath" alt="Image" class="mb-3 img-fluid">
+                        <img src="@Url.Content(post.ImagePath)" alt="Image" class="mb-3 img-fluid">
                         <figcaption class="tm-color-primary">@post.Title</figcaption>
                     </figure>
                 </a>

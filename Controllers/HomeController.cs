@@ -18,12 +18,12 @@ namespace eBlog.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult About()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
             return View();
         }
