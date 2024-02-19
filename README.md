@@ -24,7 +24,7 @@ The project utilizes Entity Framework Core for data access, .NET Core 5 for deve
 
 ## Getting Started
 
-1. **Clone the Repository**: `git clone https://github.com/your-username/eBlog-asp-mvc.git`
+1. **Clone the Repository**: `git clone https://github.com/orgestbelba/eBlog-asp-mvc.git`
 2. **Navigate to the Project Directory**: `cd eBlog-asp-mvc`
 3. **Install Dependencies**: `dotnet restore`
 4. **Set up the Database**: Ensure your connection string is configured correctly in `appsettings.json` and then run `dotnet ef database update` to apply migrations.
