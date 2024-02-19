@@ -31,7 +31,7 @@ The project utilizes Entity Framework Core for data access, .NET Core 5 for deve
 5. **Run the Application**: `dotnet run`
 6. **Access the Application**: Open your browser and navigate to `https://localhost:5001` to start using the eBlog web app.
 7. **Seeded database**: Upon running the application, seed data will automatically populate your database.
-8. **Test Account**: Optionally, you can use the following credentials for initial login: (Email: user1@etickets.com; Password: Coding@1234?
+8. **Test Credentials**: Optionally, you can use the following credentials for initial login: (Email: user1@etickets.com; Password: Coding@1234?
 
 ## Contributing
 
