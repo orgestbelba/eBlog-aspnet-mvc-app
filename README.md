@@ -27,7 +27,7 @@ The project utilizes Entity Framework Core for data access, .NET Core 5 for deve
 1. **Clone the Repository**: `git clone https://github.com/orgestbelba/eBlog-asp-mvc.git`
 2. **Navigate to the Project Directory**: `cd eBlog-asp-mvc`
 3. **Install Dependencies**: `dotnet restore`
-4. **Set up the Database**: Ensure your connection string is configured correctly in `appsettings.json` and then run `dotnet ef database update` to apply migrations.
+4. **Set up the Database**: Ensure your connection string is configured correctly in `appsettings.json` and then open the Package Manager Console and create a new migration by executing the command `add-migration cloneMigration`, then apply the migration by executing Update-Databaserun `dotnet ef database update` to apply migrations.
 5. **Run the Application**: `dotnet run`
 6. **Access the Application**: Open your browser and navigate to `https://localhost:5001` to start using the eBlog web app.
 7. **Seeded database**: Upon running the application, seed data will automatically populate your database.
